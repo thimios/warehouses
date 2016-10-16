@@ -1,24 +1,44 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a simple sketch of a rails app focusing on the models and their associations and does not include any views.
 
-Things you may want to cover:
+Models are kept thin and controllers are actually not existing, since I used the active_interaction gem to pack all business logic following the command pattern.
 
-* Ruby version
+The app deals with shipments, warehouses, products, and inventory. A shipment is a representation of a set of products that need to be shipped somewhere. A warehouse is a facility that can store inventory and maintain a list of shipments that it will be responsible for fulfilling.
 
-* System dependencies
+Try writing some specs around assigning shipments to warehouses based on inventory, so that a shipment that contains product X gets assigned to ship out of a warehouse that has inventory of product X rather than another warehouse that does not have any X.
 
-* Configuration
+## Ruby and Rails versions
 
-* Database creation
+- ruby 2.3 as defined in the Gemfile
+- rails 5
 
-* Database initialization
+## System dependencies
 
-* How to run the test suite
+- postgresql is expected to be available
 
-* Services (job queues, cache servers, search engines, etc.)
+## Configuration
 
-* Deployment instructions
+Update database.yml if necessary
 
-* ...
+## Database creation
+
+As usually `bundle exec rails db:create`
+
+## Database initialization
+
+```
+be rails db:migrate
+be rails db:test:load
+```
+## How to run the test suite
+
+```
+be rails rspec
+```
+
+## TODOs
+
+- Spec the company assign_shipment interaction with more contexts, for example when the company has more than one warehouses and the shipment consists of multiple products in different quantities.
+- Reduce inventory_quantity when assigning a shipment to a warehouse.
+- Add status to shipments.
